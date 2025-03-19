@@ -6,7 +6,8 @@ const handleFileUpload = async (req, res) => {
       type: mimetype,
       size: size
     });
-  } catch {
+  } catch (error) {
+    console.error(error);
     res.status(500).send("File upload failed");
   }
 }
