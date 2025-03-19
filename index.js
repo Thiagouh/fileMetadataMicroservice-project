@@ -1,11 +1,15 @@
-var express = require("express");
-var cors = require("cors");
-require("dotenv").config();
+const express = require("express");
+const app = express();
+const cors = require("cors");
 
-var app = express();
+const fileRouter = require("./src/routes/fileRouter");
 
-app.use(cors());
 app.use("/public", express.static(process.cwd() + "/public"));
+app.use(express.json());
+app.use(cors());
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/api", fileRouter);
 
 app.get("/", function (req, res) {
   res.sendFile(process.cwd() + "/public/index.html");
